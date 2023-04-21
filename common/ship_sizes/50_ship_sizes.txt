@@ -1,4 +1,4 @@
-#common/ship_sizes/00_ship_sizes.txt
+# SOURCE: common/ship_sizes/00_ship_sizes.txt
 #reloadable with 'reload stats'
 # This file is where you start when you want to configure something new, then go to sections
 
@@ -21,10 +21,7 @@
 			#GFX_<key>_top_damaged
 # icon_frame: now only used for starbases. Value of 2 or more means it shows up on the galaxy map, 1-5 denote which icon it uses on starbase sprite sheets (e.g. gfx/interface/icons/starbase_ship_sizes.dds)
 # ai_ship_data = {					#For determining how many ships the AI wants. Ships it can't recruit (i.e. missing tech prereqs or fails potential_country or possible_country) are pre-filtered out.
-# 	fraction = { }					#As standard, base, modifier = { factor }, etc. The AI will want this divided by the total fraction it is able to recruit. Note: it is the fraction of the naval cap, so the final value is divided by ship_modifier = {
-		ship_fire_rate_mult = 9
-	}
-	size_multiplier
+# 	fraction = { }					#As standard, base, modifier = { factor }, etc. The AI will want this divided by the total fraction it is able to recruit. Note: it is the fraction of the naval cap, so the final value is divided by size_multiplier
 #									#Note: if the fraction is > 0, the following lines will not be applied
 #	min = 1							#Sets a minimum absolute number the country will aim to have
 #	system_mult/planet_mult = 0.1	#Adds this amount for each system/planet the country owns. I.e. min + ( num planets * planet_mult ) + ( num systems * system_mult )
@@ -48,10 +45,11 @@ corvette = {
 	max_hitpoints = @corvette_hp
 	modifier = {
 		ship_evasion_add = @corvette_evasion
-		ship_piracy_suppression_add = 10
+		ship_piracy_suppression_add = 100
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -139,10 +137,11 @@ frigate = {
 	max_hitpoints = @frigate_hp
 	modifier = {
 		ship_evasion_add = @frigate_evasion
-		ship_piracy_suppression_add = 10
+		ship_piracy_suppression_add = 100
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	hull_scale = 1.25
@@ -221,10 +220,11 @@ destroyer = {
 	max_hitpoints = @destroyer_hp
 	modifier = {
 		ship_evasion_add = @destroyer_evasion
-		ship_piracy_suppression_add = 8
+		ship_piracy_suppression_add = 80
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 20
 	fleet_slot_size = 2
@@ -306,10 +306,11 @@ cruiser = {
 	max_hitpoints = @cruiser_hp
 	modifier = {
 		ship_evasion_add = @cruiser_evasion
-		ship_piracy_suppression_add = 6
+		ship_piracy_suppression_add = 60
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 40
 	fleet_slot_size = 3
@@ -408,10 +409,11 @@ battleship = {
 	max_hitpoints = @battleship_hp
 	modifier = {
 		ship_evasion_add = @battleship_evasion
-		ship_piracy_suppression_add = 4
+		ship_piracy_suppression_add = 40
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 80
 	fleet_slot_size = 4
@@ -496,6 +498,7 @@ titan = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 160
 	fleet_slot_size = 8
@@ -604,6 +607,7 @@ constructor = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -669,6 +673,7 @@ colonizer = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -806,6 +811,7 @@ sponsored_colonizer = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -874,6 +880,7 @@ lithoid_colonizer = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -939,6 +946,7 @@ science = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -1008,6 +1016,7 @@ transport = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -1041,17 +1050,15 @@ military_station_small = {
 	modifier = {
 		ship_evasion_mult = -1
 		ships_upkeep_mult = -0.25
-		ship_piracy_suppression_add = 2
+		ship_piracy_suppression_add = 20
 	}
 	ship_modifier = {
 		ship_weapon_range_mult = 0.30
 	}
-	combat_ship_modifier = {
-		ship_fire_rate_mult = 9
-	}
-	size_multiplier = 20
+	combat_size_multiplier = 20
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 2
@@ -1108,6 +1115,7 @@ military_station_medium = {
 	max_hitpoints = @station_medium_hp
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 80
 	fleet_slot_size = 4
@@ -1154,6 +1162,7 @@ military_station_large = {
 	max_hitpoints = @station_large_hp
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 160
 	fleet_slot_size = 8
@@ -1198,6 +1207,7 @@ mining_station = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -1238,6 +1248,7 @@ research_station = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1
@@ -1278,6 +1289,7 @@ observation_station = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
+		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1

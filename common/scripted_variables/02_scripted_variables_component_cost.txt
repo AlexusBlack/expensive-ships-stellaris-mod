@@ -216,33 +216,33 @@
 #	ARMOR	#
 #############
 
-@armor_S1 = 100
-@armor_M1 = 250
-@armor_L1 = 600
+@armor_S1 = 1000
+@armor_M1 = 2500
+@armor_L1 = 6000
 
-@armor_S2 = 130
-@armor_M2 = 325
-@armor_L2 = 780
+@armor_S2 = 1300
+@armor_M2 = 3250
+@armor_L2 = 7800
 
-@armor_S3 = 170
-@armor_M3 = 425
-@armor_L3 = 1020
+@armor_S3 = 1700
+@armor_M3 = 4250
+@armor_L3 = 10200
 
-@armor_S4 = 220
-@armor_M4 = 550
-@armor_L4 = 1320
+@armor_S4 = 2200
+@armor_M4 = 5500
+@armor_L4 = 13200
 
-@armor_S5 = 290
-@armor_M5 = 725
-@armor_L5 = 1740
+@armor_S5 = 2900
+@armor_M5 = 7250
+@armor_L5 = 17400
 
-@armor_S6 = 370
-@armor_M6 = 925
-@armor_L6 = 2220
+@armor_S6 = 3700
+@armor_M6 = 9250
+@armor_L6 = 22200
 
-@armor_S7 = 480
-@armor_M7 = 1200
-@armor_L7 = 2880
+@armor_S7 = 4800
+@armor_M7 = 12000
+@armor_L7 = 28800
 
 #############
 #	HULL	#
@@ -312,57 +312,57 @@
 #	SHIELD	#
 #############
 
-@shield_S1 = 75
-@shield_M1 = 190
-@shield_L1 = 450
+@shield_S1 = 750
+@shield_M1 = 1900
+@shield_L1 = 4500
 
 @regen_S1 = 0.50
 @regen_M1 = 1.25
 @regen_L1 = 3.00
 
-@shield_S2 = 100
-@shield_M2 = 250
-@shield_L2 = 600
+@shield_S2 = 1000
+@shield_M2 = 2500
+@shield_L2 = 6000
 
 @regen_S2 = 0.65
 @regen_M2 = 1.60
 @regen_L2 = 4.05
 
-@shield_S3 = 125
-@shield_M3 = 315
-@shield_L3 = 750
+@shield_S3 = 1250
+@shield_M3 = 3150
+@shield_L3 = 7500
 
 @regen_S3 = 0.85
 @regen_M3 = 2.15
 @regen_L3 = 5.10
 
-@shield_S4 = 165
-@shield_M4 = 415
-@shield_L4 = 990
+@shield_S4 = 1650
+@shield_M4 = 4150
+@shield_L4 = 9900
 
 @regen_S4 = 1.10
 @regen_M4 = 2.75
 @regen_L4 = 6.60
 
-@shield_S5 = 220
-@shield_M5 = 550
-@shield_L5 = 1320
+@shield_S5 = 2200
+@shield_M5 = 5500
+@shield_L5 = 13200
 
 @regen_S5 = 1.45
 @regen_M5 = 3.65
 @regen_L5 = 8.70
 
-@shield_S6 = 280
-@shield_M6 = 700
-@shield_L6 = 1680
+@shield_S6 = 2800
+@shield_M6 = 7000
+@shield_L6 = 16800
 
 @regen_S6 = 1.85
 @regen_M6 = 4.65
 @regen_L6 = 11.10
 
-@shield_S7 = 360
-@shield_M7 = 900
-@shield_L7 = 2160
+@shield_S7 = 3600
+@shield_M7 = 9000
+@shield_L7 = 21600
 
 @regen_S7 = 2.00
 @regen_M7 = 5.00

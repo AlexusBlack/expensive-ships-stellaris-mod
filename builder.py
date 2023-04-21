@@ -5,26 +5,29 @@ STELLARIS_PATH = "/home/alexchernov/.local/share/Steam/steamapps/common/Stellari
 
 # Adjust Ship Sizes
 def adjust_ship_sizes():
-  files_to_process = ['common/ship_sizes/00_ship_sizes.txt']
-  result_file = 'common/ship_sizes/50_ship_sizes.txt'
-  content = ''
+  files_to_process = {
+    'common/ship_sizes/00_ship_sizes.txt': 'common/ship_sizes/50_ship_sizes.txt',
+    'common/ship_sizes/04_fallen_empires.txt': 'common/ship_sizes/54_fallen_empires.txt',
+    'common/ship_sizes/08_marauder_ships.txt': 'common/ship_sizes/58_marauder_ships.txt',
+  }
   # load file contents
-  for file in files_to_process:
-    content += '#' + file + '\n'
-    with open(STELLARIS_PATH + file, 'r') as f:
+  for source_file, target_file in files_to_process.items():
+    content = '# SOURCE: ' + source_file + '\n'
+    with open(STELLARIS_PATH + source_file, 'r') as f:
       data = f.read()
 
     # replace all "size_multiplier = x" with "size_multiplier = x*10"
     data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = \g<1>0', data)
     # add "ship_modifier = { ship_fire_rate_mult = 9 }" before every "size_multiplier" string
-    data = re.sub(r'size_multiplier', r'ship_modifier = {\n\t\tship_fire_rate_mult = 9\n\t}\n\tsize_multiplier', data)
+    data = re.sub(r'\tsize_multiplier', r'\tship_modifier = {\n\t\tship_fire_rate_mult = 9\n\t\tships_upkeep_mult = 9\n\t}\n\tsize_multiplier', data)
+    # increase piracy suppression
+    data = re.sub(r'ship_piracy_suppression_add = (\d+)', r'ship_piracy_suppression_add = \g<1>0', data)
     content += data
-
-  # create directories for path if required
-  os.makedirs(os.path.dirname(result_file), exist_ok=True)
-  # save result
-  with open(result_file, 'w') as f:
-    f.write(content)
+    # create directories for path if required
+    os.makedirs(os.path.dirname(target_file), exist_ok=True)
+    # save result
+    with open(target_file, 'w') as f:
+      f.write(content)
 
 # Adjust Component Templates
 def adjust_component_templates():
@@ -73,7 +76,7 @@ def adjust_section_templates():
     with open(file, 'w') as f:
       f.write(data)
 
-# TODO: Adjust Scripted Variables
+# Adjust Scripted Variables
 def adjust_scripted_variables():
   # COMPONENT COST
   scripted_vars_file = 'common/scripted_variables/02_scripted_variables_component_cost.txt'
@@ -82,6 +85,10 @@ def adjust_scripted_variables():
   # replace cost declarations
   data = re.sub(r'@([\w_]+)cost([\w_]*) = (\d+)', r'@\g<1>cost\g<2> = \g<3>0', data)
   os.makedirs(os.path.dirname(scripted_vars_file), exist_ok=True)
+  # replace armor declarations
+  data = re.sub(r'@armor_(\w*) = (\d+)', r'@armor_\g<1> = \g<2>0', data)
+  # replace shield declarations
+  data = re.sub(r'@shield_([SML\d]{2}) = (\d+)', r'@shield_\g<1> = \g<2>0', data)
   # save result
   with open(scripted_vars_file, 'w') as f:
     f.write(data)
@@ -97,7 +104,7 @@ def adjust_scripted_variables():
   with open(scripted_vars_file, 'w') as f:
     f.write(data)
 
-#adjust_ship_sizes()
-#adjust_component_templates()
-#adjust_section_templates()
-adjust_scripted_variables()
+adjust_ship_sizes()
+# adjust_component_templates()
+# adjust_section_templates()
+# adjust_scripted_variables()
