@@ -167,7 +167,7 @@ frigate = {
 			name = energy_torpedoes
 			trigger = { has_technology = tech_energy_torpedoes_1 }
 		}
-	} 
+	}
 	prerequisites = { "tech_torpedoes_1" }
 
 	combat_disengage_chance = 1.00
@@ -605,10 +605,6 @@ constructor = {
 	modifier = {
 		ship_evasion_add = @construction_evasion
 	}
-	ship_modifier = {
-		ship_fire_rate_mult = 9
-		ships_upkeep_mult = 9
-	}
 	size_multiplier = 10
 	fleet_slot_size = 1
 	section_slots = { "mid" = { locator = "part1" } }
@@ -946,7 +942,6 @@ science = {
 	}
 	ship_modifier = {
 		ship_fire_rate_mult = 9
-		ships_upkeep_mult = 9
 	}
 	size_multiplier = 10
 	fleet_slot_size = 1

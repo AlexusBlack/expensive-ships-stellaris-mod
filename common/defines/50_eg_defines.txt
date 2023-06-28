@@ -1,0 +1,4 @@
+	NGameplay = {
+		NAVAL_CAPACITY_BASE									= 30	# Base value of Naval Capacity
+  }
+
