@@ -1,5 +1,4 @@
-	NPop = {
-		FORCED_SPECIES_GROWTH_PENALTY		= 0.05	# This amount of progress is lost on setting a forced species for growth
-		BASE_POP_GROWTH						= 0.3
+	NGameplay = {
+		NAVAL_CAPACITY_BASE									= 30	# Base value of Naval Capacity
   }
 
