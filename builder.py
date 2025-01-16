@@ -123,6 +123,6 @@ def adjust_scripted_variables():
     f.write(data)
 
 adjust_ship_sizes()
-# adjust_component_templates()
-# adjust_section_templates()
-# adjust_scripted_variables()
+adjust_component_templates()
+adjust_section_templates()
+adjust_scripted_variables()
