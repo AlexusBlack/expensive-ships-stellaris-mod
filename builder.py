@@ -7,22 +7,37 @@ STELLARIS_PATH = "/home/alexchernov/.local/share/Steam/steamapps/common/Stellari
 def adjust_ship_sizes():
   files_to_process = {
     'common/ship_sizes/00_ship_sizes.txt': 'common/ship_sizes/50_ship_sizes.txt',
-    'common/ship_sizes/04_fallen_empires.txt': 'common/ship_sizes/54_fallen_empires.txt',
-    'common/ship_sizes/08_marauder_ships.txt': 'common/ship_sizes/58_marauder_ships.txt',
+    'common/ship_sizes/04_fallen_empires.txt': 'common/ship_sizes/50_fallen_empires.txt',
+    'common/ship_sizes/08_marauder_ships.txt': 'common/ship_sizes/50_marauder_ships.txt',
+    'common/ship_sizes/20_nemesis.txt': 'common/ship_sizes/50_nemesis.txt',
+    'common/ship_sizes/25_cosmogenesis.txt': 'common/ship_sizes/50_cosmogenesis.txt',
   }
   # load file contents
   for source_file, target_file in files_to_process.items():
+    print(' === Process File: ', source_file)
+
     content = '# SOURCE: ' + source_file + '\n'
     with open(STELLARIS_PATH + source_file, 'r') as f:
       data = f.read()
 
-    # replace all "size_multiplier = x" with "size_multiplier = x*10"
-    data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = \g<1>0', data)
-    # add "ship_modifier = { ship_fire_rate_mult = 9 }" before every "size_multiplier" string
-    data = re.sub(r'\tsize_multiplier', r'\tship_modifier = {\n\t\tship_fire_rate_mult = 9\n\t\tships_upkeep_mult = 9\n\t}\n\tsize_multiplier', data)
-    # increase piracy suppression
-    data = re.sub(r'ship_piracy_suppression_add = (\d+)', r'ship_piracy_suppression_add = \g<1>0', data)
+    # == Identify ships ==
+    matches = re.findall(r'^(\w+) = \{(.+?)^\}', data, re.MULTILINE | re.DOTALL)
+    for match in matches:
+      ship_name = match[0]
+      ship_data = match[1]
+      print(' == Ship type: ' + ship_name)
+
+      # replace all "size_multiplier = x" with "size_multiplier = x*10"
+      ship_data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = \g<1>0', ship_data)
+      # add "ship_modifier = { ship_fire_rate_mult = 9 }" before every "size_multiplier" string
+      ship_data = re.sub(r'\tsize_multiplier', r'\tship_modifier = {\n\t\tship_fire_rate_mult = 9\n\t\tships_upkeep_mult = 9\n\t}\n\tsize_multiplier', ship_data)
+      # increase piracy suppression
+      ship_data = re.sub(r'ship_piracy_suppression_add = (\d+)', r'ship_piracy_suppression_add = \g<1>0', ship_data)
+
+      data = data.replace(match[1], ship_data)
+
     content += data
+
     # create directories for path if required
     os.makedirs(os.path.dirname(target_file), exist_ok=True)
     # save result
@@ -105,6 +120,6 @@ def adjust_scripted_variables():
     f.write(data)
 
 adjust_ship_sizes()
-adjust_component_templates()
-adjust_section_templates()
-adjust_scripted_variables()
+# adjust_component_templates()
+# adjust_section_templates()
+# adjust_scripted_variables()
