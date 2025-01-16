@@ -28,7 +28,10 @@ def adjust_ship_sizes():
       print(' == Ship type: ' + ship_name)
 
       # replace all "size_multiplier = x" with "size_multiplier = x*10"
-      ship_data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = \g<1>0', ship_data)
+      if ship_name in ['titan', 'cosmo_crisis_titan']:
+        ship_data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = 80', ship_data)
+      else:
+        ship_data = re.sub(r'size_multiplier = (\d+)', r'size_multiplier = \g<1>0', ship_data)
       # add "ship_modifier = { ship_fire_rate_mult = 9 }" before every "size_multiplier" string
       ship_data = re.sub(r'\tsize_multiplier', r'\tship_modifier = {\n\t\tship_fire_rate_mult = 9\n\t\tships_upkeep_mult = 9\n\t}\n\tsize_multiplier', ship_data)
       # increase piracy suppression
